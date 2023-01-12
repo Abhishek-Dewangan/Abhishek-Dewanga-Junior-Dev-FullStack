@@ -9,9 +9,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, 'What is your email?'],
     unique: [true, 'Email already exist!'],
-    // validate(value) {
-    //   if (!validator.isEmail(value)) throw new Error('Invalid email');
-    // },
+    validate(value) {
+      if (!validator.isEmail(value)) throw new Error('Invalid email');
+    },
     lowercase: true,
     trim: true,
   },
@@ -27,7 +27,16 @@ const UserSchema = new mongoose.Schema({
     trim: true,
   },
   token: String,
+  task: {
+    type: [String],
+    validate: [arrayLimit, 'Daily limit exceeded'],
+  },
 });
+
+// Set task limit
+function arrayLimit(val) {
+  return val.length <= 5;
+}
 
 // Password Hashing
 UserSchema.pre('save', async function (next) {
