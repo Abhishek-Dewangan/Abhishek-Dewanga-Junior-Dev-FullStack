@@ -27,7 +27,7 @@ userRouter.post('/signin', async (req, res) => {
       if (isMatch) {
         const token = await user.generateAuthToken();
         res.status(201).send({
-          message: 'User login successfully',
+          message: `${user.name} login successfully`,
           token,
           username: user.name,
           userid: user._id,
@@ -43,7 +43,7 @@ userRouter.post('/signin', async (req, res) => {
 
 userRouter.post('/logout', async (req, res) => {
   try {
-    const {token} = req.headers;
+    const {token} = req.body;
     const user = await User.findOne({token: token});
     if (user) {
       user.token = '';
@@ -57,34 +57,6 @@ userRouter.post('/logout', async (req, res) => {
   }
 });
 
-userRouter.post('/addtask', async (req, res) => {
-  try {
-    const {userid, task} = req.body;
-    const user = await User.findOne({_id: userid});
-    if (user) {
-      if (user.task.length < 5) {
-        user.task.push(task);
-        user.save();
-        res.send(user.task);
-      } else {
-        res.status(401).send('Daily limit exceeded');
-      }
-    } else {
-      res.status(404).send('Something went wrong please login again');
-    }
-  } catch (error) {
-    res.status(401).send(error);
-  }
-});
 
-userRouter.get('/addtask', async (req, res) => {
-  try {
-    const {userid, token} = req.body;
-    const user = await User.findOne({_id: userid});
-    res.status(200).send(user.task);
-  } catch (error) {
-    res.status(401).send(error);
-  }
-});
 
 module.exports = userRouter;

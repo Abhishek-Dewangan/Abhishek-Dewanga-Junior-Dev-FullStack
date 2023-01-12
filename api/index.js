@@ -3,6 +3,7 @@ const cors = require('cors');
 const connection = require('./database/db.js');
 require('dotenv').config();
 const userRouter = require('./routes/UserRoute.js');
+const taskRouter = require('./routes/TaskRoute.js');
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
   res.send('Hello world');
 });
 app.use('/api/user', userRouter);
+app.use('/api/task', taskRouter);
 
 app.listen(port, () =>
   console.log(`Server is runnin on http://localhost:${port}`)

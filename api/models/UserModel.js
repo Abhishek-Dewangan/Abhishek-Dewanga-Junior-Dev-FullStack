@@ -18,7 +18,6 @@ const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'What is your name?'],
-    unique: true,
   },
   password: {
     type: String,
@@ -30,6 +29,7 @@ const UserSchema = new mongoose.Schema({
   task: {
     type: [String],
     validate: [arrayLimit, 'Daily limit exceeded'],
+    default: [],
   },
 });
 
@@ -63,6 +63,16 @@ UserSchema.methods.generateAuthToken = async function () {
     console.log(error);
   }
 };
+// UserSchema.methods.updateTask = async function () {
+//   try {
+//     console.log(this);
+//     this.task = [];
+//     await this.save();
+//     return this;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 const UserModel = mongoose.model('user', UserSchema);
 
