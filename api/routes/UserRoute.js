@@ -19,9 +19,14 @@ userRouter.post('/signin', async (req, res) => {
   try {
     const {email, password} = req.body;
     const user = await User.findOne({email});
+    console.log(password);
     if (user) {
-      const result = await bcrypt.compare(password, user.password);
-      if (result) res.status(201).send({message: 'Login success'});
+      const isMatch = await bcrypt.compare(password, user.password);
+      console.log(isMatch);
+      const token = await user.generateAuthToken();
+      console.log(token);
+      if (isMatch)
+        res.status(201).send({message: 'User login successfully', token, user});
       else res.status(400).send({message: 'Wrong Password Entered'});
     } else res.status(404).send({message: 'Email is not registere'});
   } catch (error) {
