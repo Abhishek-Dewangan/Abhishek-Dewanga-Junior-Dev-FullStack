@@ -2,10 +2,12 @@ import Link from 'next/link';
 import React, {useState} from 'react';
 import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai';
 import axios from 'axios';
+import {useRouter} from 'next/router';
 
 const signup = () => {
   const [passwordType, setPasswordType] = useState('password');
   const [confirmPasswordType, setConfirmPasswordType] = useState('password');
+  const navigate = useRouter();
 
   const signup = async (e) => {
     e.preventDefault();
@@ -26,6 +28,8 @@ const signup = () => {
         userData
       );
       console.log(res);
+      alert(res.data.message);
+      navigate.push('/signin');
     } catch (error) {
       console.log(error);
       return alert(error.response.data.message);
