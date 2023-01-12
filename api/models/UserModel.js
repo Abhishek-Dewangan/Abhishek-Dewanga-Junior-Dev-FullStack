@@ -26,26 +26,29 @@ const UserSchema = new mongoose.Schema({
     minlength: [8, 'Minimum length of password should be 8'],
     trim: true,
   },
+  token: String,
 });
 
+// Password Hashing
 UserSchema.pre('save', async function (next) {
   try {
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(this.password, salt);
-    this.password = hashedPassword;
+    if (this.isModified('password')) {
+      this.password = await bcrypt.hash(this.password, 10);
+    }
     next();
   } catch (error) {
     next(error);
   }
 });
 
+// Generating token
 UserSchema.methods.generateAuthToken = async function () {
   try {
-    const token = await jwt
-      .sign({_id: this._id}, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN,
-      });
-    // await this.save();
+    const token = await jwt.sign({_id: this._id}, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRES_IN,
+    });
+    this.token = token;
+    await this.save();
     return token;
   } catch (error) {
     console.log(error);
