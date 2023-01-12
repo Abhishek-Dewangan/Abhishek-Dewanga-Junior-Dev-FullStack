@@ -1,22 +1,37 @@
 import Link from 'next/link';
 import React, {useState} from 'react';
 import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai';
+import axios from 'axios';
+import {useRouter} from 'next/router';
 
 const signin = () => {
   const [passwordType, setPasswordType] = useState('password');
-  const handleSubmit = (e) => {
+  const navigate = useRouter();
+  const signin = async (e) => {
     e.preventDefault();
-    const data = {
-      username: e.target.username.value,
-      password: e.target.password.value,
-    };
-    console.log(data);
+    try {
+      const userData = {
+        email: e.target.email.value,
+        password: e.target.password.value,
+      };
+      const res = await axios.post(
+        'http://localhost:8080/api/user/signin',
+        userData
+      );
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('username', res.data.username);
+      alert(res.data.message);
+      navigate.push('/');
+    } catch (error) {
+      console.log(error);
+      alert(error.response.data.message);
+    }
   };
   return (
-    <>
+    <div>
       <title>Signin</title>
       <div className='outline outline-gray-500 outline-1 rounded grid gap-5 w-fit place-content-center mx-auto mt-20 p-10'>
-        <form onSubmit={handleSubmit} className='grid gap-5'>
+        <form onSubmit={signin} className='grid gap-5'>
           <div>
             <label>Email</label>
             <br />
@@ -68,7 +83,7 @@ const signin = () => {
           </Link>
         </p>
       </div>
-    </>
+    </div>
   );
 };
 
