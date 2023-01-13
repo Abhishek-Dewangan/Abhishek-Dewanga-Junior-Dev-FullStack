@@ -16,24 +16,31 @@ const Home = () => {
     const name = localStorage.getItem('username') || '';
     const token = localStorage.getItem('token') || '';
     const userid = localStorage.getItem('userid') || '';
-    const oldDate = localStorage.getItem('date') || '';
+    let oldDate = localStorage.getItem('date') || '';
     setUserid(userid);
     setUsername(name);
     setToken(token);
     if (!token) navigate.push('/signup');
     else {
       getTask(userid);
+      oldDate = dateUpdate(oldDate, userid) || oldDate;
       setInterval(() => {
-        const newDate = new Date().toString().split(' ')[2];
-        if (!oldDate) {
-          localStorage.setItem('date', date[2]);
-        }
-        if (oldDate && oldDate !== newDate) {
-          updateTask(userid);
-        }
-      }, 200000);
+        oldDate = dateUpdate(oldDate, userid) || oldDate;
+      }, 10000);
     }
   }, []);
+
+  const dateUpdate = (oldDate, userid) => {
+    const newDate = new Date().toString().split(' ')[2];
+    if (!oldDate) {
+      localStorage.setItem('date', date[2]);
+    }
+    if (oldDate && oldDate !== newDate) {
+      updateTask(userid);
+      localStorage.setItem('date', newDate);
+      return localStorage.getItem('date');
+    }
+  };
 
   const curentDate = `${
     date[2][date[2].length - 1] === '1'
