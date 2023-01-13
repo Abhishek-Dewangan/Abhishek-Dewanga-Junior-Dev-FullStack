@@ -117,17 +117,33 @@ const Home = () => {
       <div className='lg:flex  bg-#FFFFFF'>
         <div className='outline outline-gray-500 outline-1 w-fit h-full min-w-max rounded grid gap-5 w-fit place-content-center mx-auto mt-20 p-10 m-3'>
           <p className='text-xl'>Welcome!</p>
-          <h1 className='text-2xl font-bold'>{username}</h1>
-          <p className=''>Good to see you here!</p>
+          <div>
+            <p className='text-2xl font-bold'>{username}</p>
+            <p className='text-gray-600'>Good to see you here!</p>
+          </div>
           <p className='text-l font-bold'>Tasks for {curentDate}:</p>
-          {tasks && (
+          {tasks.length ? (
             <div>
               <ul className='list-disc ml-5'>
                 {tasks.map((elem, i) => {
-                  return <li key={i}>{elem}</li>;
+                  return (
+                    <li key={i} className='text-gray-800'>
+                      {elem}
+                    </li>
+                  );
                 })}
               </ul>
+              <button
+                className='mt-3 text-red-500 font-bold text-sm'
+                onClick={() => updateTask(userid)}
+              >
+                Clear Tasks
+              </button>
             </div>
+          ) : (
+            <ul className='list-disc ml-5'>
+              <li className='text-gray-500'>Task list is empty!</li>
+            </ul>
           )}
           <form onSubmit={addTask} className='grid gap-5'>
             <div>
@@ -145,7 +161,7 @@ const Home = () => {
               <input
                 type={'submit'}
                 value='Add New Task'
-                className='bg-black text-white px-5 py-2 w-80 mr-4 rounded'
+                className='bg-black text-white px-5 py-2 w-80 mr-4 rounded cursor-pointer'
               />
             </div>
           </form>

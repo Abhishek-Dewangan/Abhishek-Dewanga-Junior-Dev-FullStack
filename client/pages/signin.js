@@ -76,7 +76,7 @@ const signin = () => {
               <input
                 type={'submit'}
                 value='SignIn'
-                className='bg-black text-white px-5 py-2 w-80 mr-4 rounded'
+                className='bg-black text-white px-5 py-2 w-80 mr-4 rounded cursor-pointer'
               />
             </div>
           </form>
