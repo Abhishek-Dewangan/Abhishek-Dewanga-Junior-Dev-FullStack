@@ -32,7 +32,7 @@ const signin = () => {
     <div>
       <title>Signin</title>
       <div className='lg:flex  bg-#FFFFFF '>
-        <div className='outline outline-gray-500 outline-1 rounded grid gap-5 w-fit h-full place-content-center mx-auto mt-20 w-96 px-3 py-11'>
+        <div className='outline outline-gray-500 outline-1 rounded grid gap-5 w-fit h-full place-content-center mx-auto mt-16 w-96 px-3 py-11'>
           <p className='text-2xl'>Welcome!</p>
           <p className='text-3xl font-bold'>Sign in to</p>
           <form onSubmit={signin} className='grid gap-5'>

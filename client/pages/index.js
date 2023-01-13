@@ -115,7 +115,7 @@ const Home = () => {
         <title>Dashboard</title>
       </Head>
       <div className='lg:flex  bg-#FFFFFF'>
-        <div className='outline outline-gray-500 outline-1 w-fit h-full min-w-max rounded grid gap-5 w-fit place-content-center mx-auto mt-20 p-10 m-3'>
+        <div className='outline outline-gray-500 outline-1 w-fit h-full min-w-max rounded grid gap-5 w-fit place-content-center mx-auto mt-16 p-10 m-3'>
           <p className='text-xl'>Welcome!</p>
           <div>
             <p className='text-2xl font-bold'>{username}</p>

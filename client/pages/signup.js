@@ -38,10 +38,10 @@ const signup = () => {
     <div>
       <title>Signup</title>
       <div className='lg:flex  bg-#FFFFFF '>
-        <div className='outline outline-gray-500 outline-1 rounded grid gap-5 w-fit h-full place-content-center mx-auto mt-20 w-96 px-3 py-11'>
+        <div className='outline outline-gray-500 outline-1 rounded grid gap-5 w-fit h-full place-content-center mx-auto mt-16 w-96 px-3 py-11'>
           <p className='text-2xl'>Welcome!</p>
           <p className='text-3xl font-bold'>Sign up to</p>
-          <form onSubmit={signup} className='grid gap-5'>
+          <form onSubmit={signup} className='grid gap-3'>
             <div>
               <label>Email</label>
               <br />
@@ -50,7 +50,7 @@ const signup = () => {
                 type='text'
                 name='email'
                 placeholder='Eg. john@gamil.com'
-                className='outline outline-1 rounded px-5 py-2 w-80'
+                className='outline outline-1 rounded px-5 py-1 w-80'
               />
             </div>
             <div>
@@ -61,7 +61,7 @@ const signup = () => {
                 type={'text'}
                 name='name'
                 placeholder='Eg. John Doe'
-                className='outline outline-1 rounded px-5 py-2 w-80'
+                className='outline outline-1 rounded px-5 py-1 w-80'
               />
             </div>
             <div>
@@ -72,7 +72,7 @@ const signup = () => {
                 type={passwordType}
                 name='password'
                 placeholder='*********'
-                className='outline outline-1 rounded px-5 py-2 w-80'
+                className='outline outline-1 rounded px-5 py-1 w-80'
               />
               <button
                 type='button'
@@ -97,7 +97,7 @@ const signup = () => {
                 type={confirmPasswordType}
                 name='confirmpassword'
                 placeholder='*********'
-                className='outline outline-1 rounded px-5 py-2 w-80'
+                className='outline outline-1 rounded px-5 py-1 w-80'
               />
               <button
                 type='button'
@@ -118,7 +118,7 @@ const signup = () => {
               <input
                 type={'submit'}
                 value='Register'
-                className='bg-black text-white px-5 py-2 w-80 mr-4 rounded cursor-pointer'
+                className='bg-black text-white px-5 py-2 w-80 mr-4 mt-2 rounded cursor-pointer'
               />
             </div>
           </form>
