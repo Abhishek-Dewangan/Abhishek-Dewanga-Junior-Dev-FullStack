@@ -178,7 +178,7 @@ const Home = () => {
       </div>
     </div>
   ) : (
-    <h1>Redirect to signup</h1>
+    ''
   );
 };
 
