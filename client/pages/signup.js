@@ -24,7 +24,7 @@ const signup = () => {
         password: e.target.password.value,
       };
       const res = await axios.post(
-        'http://localhost:8080/api/user/signup',
+        'https://mytodoapp-hsvf.onrender.com/api/user/signup',
         userData
       );
       alert(res.data.message);
@@ -37,10 +37,10 @@ const signup = () => {
   return (
     <div>
       <title>Signup</title>
-      <div className='flex  bg-#FFFFFF '>
+      <div className='lg:flex  bg-#FFFFFF '>
         <div className='outline outline-gray-500 outline-1 rounded grid gap-5 w-fit h-full place-content-center mx-auto mt-20 w-96 px-3 py-11'>
           <p className='text-2xl'>Welcome!</p>
-          <p className='text-3xl font-bold'>Sign in to</p>
+          <p className='text-3xl font-bold'>Sign up to</p>
           <form onSubmit={signup} className='grid gap-5'>
             <div>
               <label>Email</label>

@@ -48,7 +48,7 @@ const Home = () => {
   const updateTask = async (userid) => {
     try {
       const res = await axios.put(
-        `http://localhost:8080/api/task/updatetask/${userid}`,
+        `https://mytodoapp-hsvf.onrender.com/api/task/updatetask/${userid}`,
         {task: []}
       );
       getTask(userid);
@@ -60,7 +60,7 @@ const Home = () => {
   const getTask = async (userid) => {
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/task/gettask/${userid}`
+        `https://mytodoapp-hsvf.onrender.com/api/task/gettask/${userid}`
       );
       setTasks(res.data.tasks);
     } catch (error) {
@@ -72,7 +72,7 @@ const Home = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `http://localhost:8080/api/task/addtask/${userid}`,
+        `https://mytodoapp-hsvf.onrender.com/api/task/addtask/${userid}`,
         {task}
       );
       getTask(userid);
@@ -85,7 +85,7 @@ const Home = () => {
   const logout = async () => {
     try {
       const res = await axios.post(
-        'http://localhost:8080/api/user/logout',
+        'https://mytodoapp-hsvf.onrender.com/api/user/logout',
         {token: token},
         {
           headers: {
@@ -107,8 +107,8 @@ const Home = () => {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <div className='flex  bg-#FFFFFF '>
-        <div className='outline outline-gray-500 outline-1 w-fit h-full rounded grid gap-5 w-fit place-content-center mx-auto mt-20 p-10 m-3'>
+      <div className='lg:flex  bg-#FFFFFF'>
+        <div className='outline outline-gray-500 outline-1 w-fit h-full min-w-max rounded grid gap-5 w-fit place-content-center mx-auto mt-20 p-10 m-3'>
           <p className='text-xl'>Welcome!</p>
           <h1 className='text-2xl font-bold'>{username}</h1>
           <p className=''>Good to see you here!</p>
