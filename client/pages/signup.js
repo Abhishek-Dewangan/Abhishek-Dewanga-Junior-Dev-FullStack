@@ -31,6 +31,9 @@ const signup = () => {
       navigate.push('/signin');
     } catch (error) {
       console.log(error);
+      if (error.response.data.error.name === 'ValidationError') {
+        return alert('Please enter a valid email');
+      }
       return alert(error.response.data.message);
     }
   };
